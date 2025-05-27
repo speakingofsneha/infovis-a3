@@ -3,20 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@astrojs/db": "^0.14.14",
+    "@astrojs/react": "^4.3.0",
+    "@tailwindcss/vite": "^4.1.7",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "astro": "^5.8.0",
+    "d3": "^7.9.0",
+    "plotly.js": "^3.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-plotly.js": "^2.6.0",
     "react-scripts": "5.0.1",
+    "vite": "^6.3.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
   },
   "eslintConfig": {
     "extends": [
@@ -35,5 +45,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@astrojs/tailwind": "^6.0.2",
+    "sass-embedded": "^1.89.0",
+    "tailwindcss": "^4.1.7"
   }
 }

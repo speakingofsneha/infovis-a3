@@ -1,0 +1,103 @@
+---
+import Sidebar from '../layouts/sidebar.astro';
+import '../styles/index.scss';
+import ThermalComfortTable from '../components/uncomfylb.jsx';
+---
+
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IEQ Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  </head>
+  <body>
+    <Sidebar />
+    
+    <div class="main-content">
+      <!-- Sticky Topbar -->
+      <div class="topbar">
+        <h1>welcome back, <span class="highlight">sarah!</span></h1>
+      </div>
+
+      <!-- Scrollable Dashboard Content -->
+      <main class="dashboard">
+        <p class="last-updated">Last updated: 5:34 pm</p>
+          
+          <section class="summary">
+            <div class="score-card">
+              <div class="score-circle">82</div>
+              <div>
+                <div class="score-label">our score</div>
+                <div class="score-status">Good</div>
+              </div>
+            </div>
+          
+            <a href="/thermalcomf" class="metric-card thermal-comfort-width" title="View Thermal Comfort details">
+              <div class="card-title">Thermal Comfort</div>
+              <div class="card-metrics">
+                <div class="metric-group">
+                  <div class="metric-value temp">
+                    <span class="value-main">24.2</span><span class="value-unit">°c</span>
+                  </div>
+                  <div class="metric-label">air temp</div>
+                </div>
+                <div class="metric-group">
+                  <div class="metric-value humidity">
+                    <span class="value-main">54</span><span class="value-unit">%</span>
+                  </div>
+                  <div class="metric-label">humidity</div>
+                </div>
+                <div class="metric-group">
+                  <div class="metric-value speed">
+                    <span class="value-main">.05</span><span class="value-unit">m/s</span>
+                  </div>
+                  <div class="metric-label">air speed</div>
+                </div>
+                <div class="metric-group">
+                  <div class="metric-value pmv">
+                    <span class="value-main">-0.6</span>
+                  </div>
+                  <div class="metric-label">pmv</div>
+                </div>
+              </div>
+            </a>
+          
+            <a href="/airq" class="metric-card air-quality-width" title="View Air Quality details">
+              <div class="card-title">Air Quality</div>
+              <div class="card-metrics">
+                <div class="metric-group">
+                  <div class="metric-value">
+                    <span class="value-main">1021</span><span class="value-unit">ppm</span>
+                  </div>
+                  <div class="metric-label">co₂</div>
+                </div>
+              </div>
+            </a>
+          
+            <a class="metric-card environment-width" title="View Environment details">
+              <div class="card-title">Environment</div>
+              <div class="card-metrics">
+                <div class="metric-group">
+                  <div class="metric-value">
+                    <span class="value-main">429</span><span class="value-unit">lx</span>
+                  </div>
+                  <div class="metric-label">illuminance</div>
+                </div>
+                <div class="metric-group">
+                  <div class="metric-value">
+                    <span class="value-main">49</span><span class="value-unit">db</span>
+                  </div>
+                  <div class="metric-label">sound</div>
+                </div>
+              </div>
+            </a>
+          </section>
+
+       <!-- <UncomfyLB client:load /> -->
+        <ThermalComfortTable client:only="react"/>
+      </main>
+    </div>
+  </body>
+</html>
