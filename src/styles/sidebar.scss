@@ -1,9 +1,11 @@
 @use 'base';
 
+// CSS custom property for consistent sidebar width across components
 :root {
   --sidebar-width: 4rem;
 }
 
+// Fixed sidebar with full height and subtle styling
 .sidebar {
   position: fixed;
   top: 0;
@@ -11,16 +13,17 @@
   bottom: 0;
   width: var(--sidebar-width);
   height: 100vh;
-  background: #E3E2F2;
-  z-index: 1000;
+  background: #E3E2F2; // light purple background
+  z-index: 1000; // ensures sidebar stays above other content
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
   border-right: 1px solid #D4D2DE;
-  box-shadow: inset -3px 0 4px rgba(0, 0, 0, 0.05);
+  box-shadow: inset -3px 0 4px rgba(0, 0, 0, 0.05); // subtle inner shadow
 }
 
+// Logo container at top of sidebar
 .sidebar-logo {
   width: 100%;
   display: flex;
@@ -28,25 +31,27 @@
   align-items: center;
   height: 4rem;
   min-height: 4rem;
-  border-bottom: 1px solid #D4D2DE;
+  border-bottom: 1px solid #D4D2DE; // separates logo from navigation
 
   img {
     width: 28px;
     height: 28px;
     object-fit: contain;
-    background: #fff;
+    background: #fff; // white background for logo visibility
   }
 }
 
+// Navigation menu container with flexible layout
 .sidebar-menu {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-top: 34px; // pushes icons lower, adjust as needed
+  margin-top: 34px; // creates spacing below logo
   width: 100%;
 }
 
+// Navigation list with centered icon layout
 .sidebar-menu ul {
   list-style: none;
   padding: 0;
@@ -54,9 +59,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 15px; // consistent spacing between navigation items
 }
 
+// Individual navigation link styling with hover and active states
 .sidebar-link {
   display: flex;
   align-items: center;
@@ -68,19 +74,20 @@
   text-decoration: none;
 
   &:hover, &:focus {
-    background: rgba(255,255,255,0.10);
+    background: rgba(255,255,255,0.10); // subtle hover effect
   }
 
   &.active {
-    background: white;
+    background: white; // white background for active page
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 
     .material-symbols-outlined {
-      color: #4B4A4A;
+      color: #4B4A4A; // darker icon color for active state
     }
   }
 }
 
+// Material icons configuration with consistent styling
 .material-symbols-outlined {
   font-variation-settings:
     'FILL' 0,
@@ -89,7 +96,7 @@
     'opsz' 22;
   font-size: 1.9rem;
   color: #4B4A4A;
-  user-select: none;
-  pointer-events: none;
+  user-select: none; // prevents text selection
+  pointer-events: none; // ensures clicks go to parent link
   transition: color 0.2s;
 }

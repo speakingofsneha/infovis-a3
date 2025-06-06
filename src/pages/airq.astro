@@ -2,6 +2,7 @@
 import Sidebar from '../layouts/sidebar.astro';
 import CO2History from '../components/co2history.jsx';
 import CO2Trends from '../components/co2trends.jsx';
+import '../styles/metric.scss';
 import '../styles/index.scss';
 ---
 
@@ -28,37 +29,15 @@ import '../styles/index.scss';
 
       <!-- Scrollable Dashboard Content -->
       <main class="dashboard">
-        <p class="last-updated">Last updated: 5:34 pm</p>
-        <div class="summary">
-          <a class="metric-card thermal-comfort-width" title="View Thermal Comfort details">
-            <div class="card-title">Overall Status</div>
-            <div class="card-metrics">
-              <div class="metric-group">
-                <div class="metric-value temp">
-                  <span class="value-main">Great!</span> 
-                </div>
-              </div>
-            </div>
-          </a>
-          <a class="metric-card thermal-comfort-width" title="View Thermal Comfort details">
-            <div class="card-title">CO2</div>
-            <div class="card-metrics">
-              <div class="metric-group">
-                <div class="metric-value temp">
-                  <span class="value-main">550ppm</span> 
-                </div>
-              </div>
-            </div>
-            
-          </a>
-        </div>
-
         <div class="history">
           <CO2History client:only="react"/>
-      </div>
-      <div class="trends-container">
-        <CO2Trends client:only="react"/>
-      </div>
+        </div>
+        <br><br>
+        <br><br>
+        <p class="heading">Trends</p>
+        <div class="trends-container">
+          <CO2Trends client:only="react"/>
+        </div>
       </main>
     </div>
   </body>

@@ -1,0 +1,73 @@
+@use './base.scss' as base;
+
+// Base alert component styling with flexbox layout and consistent spacing
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 14px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  position: relative;
+  line-height: 1.5;
+  color: base.$dark-text;
+}
+
+// Icon styling to ensure consistent size and prevent shrinking
+.alert .material-symbols-outlined {
+  font-size: 1.5em;
+  flex-shrink: 0;
+}
+
+// Alert type variants using semantic color coding for immediate recognition
+// Each type uses light background with darker text for accessibility
+.alert-warning {
+  background: #fffbe6;
+  color: #b8860b;
+  border-color: #ffe58f;
+}
+
+.alert-success {
+  background: #f6ffed;
+  color: #389e0d;
+  border-color: #b7eb8f;
+}
+
+.alert-error {
+  background: #fff1f0;
+  color: #cf1322;
+  border-color: #ffa39e;
+}
+
+.alert-info {
+  background: #e6f7ff;
+  color: #096dd9;
+  border-color: #91d5ff;
+}
+
+// Optional close button positioned absolutely for consistent placement
+.alert .close {
+  position: absolute;
+  right: 16px;
+  top: 14px;
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  color: inherit;
+  cursor: pointer;
+}
+
+// Container styling to constrain width and provide consistent spacing
+.alerts-list {
+  max-width: 600px;
+  margin-left: 0;
+  padding-top: 32px;
+}
+
+// Remove top margin from first alert to prevent double spacing
+.alerts-list .alert:first-child {
+  margin-top: 0;
+}

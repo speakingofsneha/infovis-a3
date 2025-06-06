@@ -1,6 +1,7 @@
 ---
 import Sidebar from '../layouts/sidebar.astro';
 import '../styles/index.scss';
+import '../styles/alerts.scss';
 ---
 
 
@@ -9,20 +10,48 @@ import '../styles/index.scss';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IEQ Dashboard</title>
+    <!-- google fonts for material icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
   </head>
   <body>
+    <!-- sidebar navigation component -->
     <Sidebar />
     
     <div class="main-content">
-      <!-- Sticky Topbar -->
+      <!-- sticky header bar -->
       <div class="topbar">
-        <h1>alerts</h1>
+        <h1>Alerts</h1>
       </div>
 
-      <!-- Scrollable Dashboard Content -->
+      <!-- main dashboard content area -->
       <main class="dashboard">
-        
+        <!-- container for all alert notifications -->
+        <div class="alerts-list">
+          <div class="alert alert-warning">
+            <span class="material-symbols-outlined">warning</span>
+            73% of women in Zone 52 report feeling too cold.
+          </div>
+          <div class="alert alert-error">
+            <span class="material-symbols-outlined">error</span>
+            Air quality above ideal conditions in Floor 27.
+          </div>
+          <div class="alert alert-success">
+            <span class="material-symbols-outlined">check_circle</span>
+            All sensors in Lobby are reporting normal conditions.
+          </div>
+          <div class="alert alert-info">
+            <span class="material-symbols-outlined">info</span>
+            CO₂ levels in Zone 30 are trending downward.
+          </div>
+          <div class="alert alert-warning">
+            <span class="material-symbols-outlined">warning</span>
+            Humidity in Floor 25 is approaching upper comfort limit.
+          </div>
+          <div class="alert alert-error">
+            <span class="material-symbols-outlined">error</span>
+            PM2.5 levels in Zone 28 are above recommended threshold.
+          </div>
+        </div>
       </main>
     </div>
   </body>

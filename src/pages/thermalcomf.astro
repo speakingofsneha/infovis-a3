@@ -1,9 +1,9 @@
 ---
 import Sidebar from '../layouts/sidebar.astro';
-import Heatmap from '../components/heatmap.jsx';
-import Boxplot from '../components/boxplot.jsx';
+import ThermalComfortDashboard from '../components/ThermalComfortDashboard.jsx';
 import ComfortTrends from '../components/comfort.trends.jsx';
 import BandedRange from '../components/bandedrange.jsx';
+import '../styles/metric.scss';
 import '../styles/index.scss';
 ---
 
@@ -12,15 +12,19 @@ import '../styles/index.scss';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IEQ Dashboard</title>
+    <!-- google fonts for material icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <!-- plotly.js for interactive charts -->
     <script src="https://cdn.plot.ly/plotly-2.27.1.min.js"></script>
+    <!-- d3.js for data visualization -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
   </head>
   <body>
+    <!-- sidebar navigation -->
     <Sidebar />
     
     <div class="main-content">
-      <!-- Sticky Topbar -->
+      <!-- sticky header with back button -->
       <div class="topbar">
         <h1>
           <a class="back-button" href="/">←</a>
@@ -28,18 +32,79 @@ import '../styles/index.scss';
         </h1>
       </div>
 
-      <!-- Scrollable Dashboard Content -->
+      <!-- main dashboard content area -->
       <main class="dashboard">
-        <div class="charts-container">
-          <Heatmap client:only="react"/>
-          <Boxplot client:only="react"/>
-        </div>
+        <!-- main thermal comfort dashboard component -->
+        <ThermalComfortDashboard client:only="react" />
+        <!-- spacing breaks -->
+        <br><br>
+        <br><br>
+        <!-- trends section heading -->
+        <p class="heading"> Trends</p>
         <div class="trends-container">
+          <!-- comfort trends chart component -->
           <ComfortTrends client:only="react"/>
         </div>
+        <br><br>
+        <br><br>
+        <!-- diverse populations section with info tooltip -->
+        <div class="heading" style="position: relative;">
+          Thermal comfort for diverse populations
+          <!-- info icon that triggers popup -->
+          <span class="info-icon" id="infoIcon" tabindex="0" aria-label="More info">i</span>
+          <!-- popup with research info and links -->
+          <div class="info-popup" id="infoPopup">
+            <button class="info-popup-close" id="infoPopupClose" aria-label="Close info">×</button>
+            <strong>About this chart:</strong><br/><br/>
+            This chart uses calculations based on Jones et al. (2019), which account for demographic differences 
+            in thermal perception. For more details, you can refer to the <a href = "https://comfort.arup.com/Predicting%20Thermal%20Comfort%20for%20Diverse%20Populations.pdf" target="_blank">original paper</a>, 
+            or explore the <a href = "https://comfort.arup.com/" target="_blank">advanced comfort tool</a> developed by the authors. 
+          </div>
+        </div>
         <div class="trends-container">
+          <!-- banded range chart for diverse populations -->
           <BandedRange client:only="react" />
         </div>
+        <!-- inline javascript for popup functionality -->
+        <script is:inline>
+          // get dom elements for popup interaction
+          const infoIcon = document.getElementById('infoIcon');
+          const infoPopup = document.getElementById('infoPopup');
+          const infoPopupClose = document.getElementById('infoPopupClose');
+          if (infoIcon && infoPopup) {
+            // click handler to toggle popup
+            infoIcon.addEventListener('click', (e) => {
+              e.stopPropagation();
+              infoPopup.classList.toggle('active');
+            });
+            // close button handler
+            if (infoPopupClose) {
+              infoPopupClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                infoPopup.classList.remove('active');
+              });
+            }
+            // click outside to close popup
+            document.addEventListener('click', (e) => {
+              if (!infoPopup.contains(e.target) && e.target !== infoIcon) {
+                infoPopup.classList.remove('active');
+              }
+            });
+            // keyboard accessibility - enter/space to open
+            infoIcon.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                infoPopup.classList.toggle('active');
+              }
+            });
+            // escape key to close popup
+            document.addEventListener('keydown', (e) => {
+              if (e.key === 'Escape') {
+                infoPopup.classList.remove('active');
+              }
+            });
+          }
+        </script>
       </main>
     </div>
   </body>

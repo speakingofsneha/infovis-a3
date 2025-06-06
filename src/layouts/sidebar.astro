@@ -1,15 +1,20 @@
 ---
 import "../styles/sidebar.scss";
 
+// get current page path for active link highlighting
 const currentPath = Astro.url.pathname;
 ---
 
 <aside class="sidebar">
+  {/* logo section at top of sidebar */}
   <div class="sidebar-logo">
     <img src="/favicon.png" alt="Logo" />
   </div>
+  
+  {/* main navigation menu */}
   <nav class="sidebar-menu">
     <ul>
+      {/* analytics/dashboard link - active for both home and thermal comfort pages */}
       <li>
         <a 
           href="/" 
@@ -19,6 +24,8 @@ const currentPath = Astro.url.pathname;
           <span class="material-symbols-outlined">analytics</span>
         </a>
       </li>
+      
+      {/* alerts page link */}
       <li>
         <a 
           href="/alerts" 
@@ -28,6 +35,8 @@ const currentPath = Astro.url.pathname;
           <span class="material-symbols-outlined">notifications</span>
         </a>
       </li>
+      
+      {/* about page link - opens in new tab */}
       <li>
         <a 
           href="/about" 
