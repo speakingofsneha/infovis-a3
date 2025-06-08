@@ -9,7 +9,7 @@
 
 // base html and body setup
 html, body {
-	font-family: 'Apercu Pro';
+	font-family: 'Apercu Pro Regular';
 	margin: 0px;
 	scroll-behavior: smooth;
 	background: #F7F7F7;
@@ -46,10 +46,12 @@ title {
 
 .h1-title {
 	font-size: 4rem;
+	font-family: 'Apercu Pro Medium';
 }
 
 .h2-title {
 	font-size: 2.2rem;
+	font-family: 'Apercu Pro Medium';
 }
 
 .h3-title {
@@ -138,7 +140,7 @@ section {
 .logo-text {
     font-size: 1.2em;
     margin-left: 100px;
-    margin-top: -28px;
+    margin-top: -34px;
 }
 
 // hero section layout and positioning

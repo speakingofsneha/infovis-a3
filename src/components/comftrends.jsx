@@ -85,21 +85,21 @@ function ComfortTrends() {
                     {
                         x: xLabels,
                         y: comfortable,
-                        name: 'Comfortable',
+                        name: 'Comfortable (21-25°C)', // 21-25°C is the comfort range; best for transitional weather (may in sydney)
                         type: 'bar',
                         marker: { color: '#FDD07A' } // warm yellow for comfortable conditions
                     },
                     {
                         x: xLabels,
                         y: tooHot,
-                        name: 'Too Hot',
+                        name: 'Too Hot (>25°C)',
                         type: 'bar',
                         marker: { color: '#FF7057' } // red for hot conditions
                     },
                     {
                         x: xLabels,
                         y: tooCold,
-                        name: 'Too Cold',
+                        name: 'Too Cold (<21°C)', 
                         type: 'bar',
                         marker: { color: '#3D72D5' } // blue for cold conditions
                     }
@@ -200,38 +200,44 @@ function ComfortTrends() {
                 </div>
             </div>
 
-            {/* conditional rendering based on component state */}
-            {/* loading state with centered spinner/message */}
-            {isLoading && (
-                <div className="flex justify-center items-center h-64">
-                    <div className="text-gray-600">Loading chart data...</div>
-                </div>
-            )}
-
-            {/* error state with styled error message */}
-            {error && (
-                <div className="text-red-600 mb-4 p-4 bg-red-50 rounded">
-                    Error loading data: {error}
-                </div>
-            )}
-
-            {/* successful data load - render interactive plotly chart */}
-            {!isLoading && !error && data.length > 0 && layout && (
-                <Plot 
-                    data={data} 
-                    layout={layout}
-                    config={{ responsive: true }} // enable responsive resizing
-                />
-            )}
-
-            {/* no data available */}
-            {!isLoading && !error && data.length === 0 && (
-                <div className="text-gray-600 p-4 text-center">
-                    No data available for the selected parameters
-                </div>
-            )}
+            {/* chart display area with comprehensive state handling */}
+            <div style={{ minHeight: 750, position: 'relative' }}>
+                {/* loading state with informative message */}
+                {isLoading ? (
+                    <div style={{
+                        position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        background: 'white', zIndex: 2
+                    }}>
+                        <div className="text-gray-600">Loading chart data...</div>
+                    </div>
+                ) : error ? (
+                    // error state with clear messaging
+                    <div className="text-red-600 mb-4 p-4 bg-red-50 rounded">
+                        Error loading data: {error}
+                    </div>
+                ) : data.length > 0 && layout ? (
+                    // successful data load - render stacked bar chart
+                    <Plot data={data} layout={layout} config={{ responsive: true }} />
+                ) : (
+                    // empty state message
+                    <div className="text-gray-600 p-4 text-center">
+                        No data available for the selected parameters
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
+
+// Add keyframes for the loading spinner
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+`;
+document.head.appendChild(style);
 
 export default ComfortTrends;

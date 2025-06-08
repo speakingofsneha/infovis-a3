@@ -116,14 +116,16 @@ line-height: normal;
 // interactive metric cards with hover effects for navigation
 .metric-card {
 @extend .card-base;
-cursor: pointer;
 text-decoration: none;
 color: inherit;
 
-&:hover, &:focus {
-  box-shadow: 0 4px 16px rgba(106, 90, 205, 0.10), 0 1.5px 7px rgba(0, 0, 0, 0.06);
-  transform: translateY(-2px) scale(1.02);
-  outline: none;
+&:not(.environment-width) {
+  cursor: pointer;
+  &:hover, &:focus {
+    box-shadow: 0 4px 16px rgba(106, 90, 205, 0.10), 0 1.5px 7px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px) scale(1.02);
+    outline: none;
+  }
 }
 
 .card-title {

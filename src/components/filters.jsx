@@ -27,7 +27,7 @@ function FilterControls({ selectedZone, onZoneChange, selectedTimeRange, onTimeR
           id="zone-select"
           value={selectedZone} // controlled component - value from parent state
           onChange={(e) => onZoneChange(e.target.value)} // callback to update parent state
-          // tailwind classes for consistent styling with focus states
+          // css classes for consistent styling with focus states
           className="block w-40 px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
         >
           {/* dynamically generate options from zones array */}
