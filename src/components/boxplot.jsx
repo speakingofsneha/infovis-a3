@@ -3,23 +3,25 @@ import Plot from 'react-plotly.js';
 import * as d3 from 'd3';
 
 function BoxPlot({ selectedZone, selectedTimeRange }) {
-  // state for chart data and configuration
+  // state management for chart data and error handling
   const [traces, setTraces] = useState([]);
   const [layout, setLayout] = useState(null);
   const [error, setError] = useState(null);
 
-  // 24-hour time labels for x-axis display
+  // human-readable time labels instead of 24-hour format numbers
+  // makes the chart more user-friendly for facility managers
   const hourLabels = [
     '12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM', '8 AM',
     '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM',
     '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM'
   ];
 
-  // transforms csv data into plotly box plot format
+  // converts aggregated csv statistics into plotly box plot format
+  // using mean ± std dev to approximate quartiles since we don't have raw data points
   function createBoxPlotData(data) {
     console.log('Creating box plot data from:', data);
     
-    // convert string values to numbers for calculations
+    // ensure all values are numeric for proper calculations
     data.forEach(d => {
       d.hour = +d.hour;
       d.mean = +d.mean;
@@ -31,26 +33,27 @@ function BoxPlot({ selectedZone, selectedTimeRange }) {
 
     const boxPlotData = [];
     
-    // create individual box plot for each hour using statistical data
+    // create separate box plot trace for each hour of the day
     data.forEach(d => {
       if (d.hour >= 0 && d.hour <= 23) {
         boxPlotData.push({
           type: 'box',
-          // box plot quartiles using mean ± std dev approximation
+          // approximating box plot quartiles using statistical data
+          // this is a workaround since we have aggregated data, not raw points
           y: [d.min, d.min, d.mean - d.std, d.mean, d.mean + d.std, d.max, d.max],
-          name: hourLabels[d.hour], // display friendly hour name
-          boxpoints: false, // don't show individual data points
+          name: hourLabels[d.hour], // friendly hour display
+          boxpoints: false, // cleaner look without individual points
           marker: {
-            color: '#3D72D5' // blue color for boxes
+            color: '#3D72D5' // consistent blue theme
           },
           line: {
             width: 1.5
           },
           fillcolor: '#3D72D5',
           boxwidth: 0.9,
-          showlegend: false, // hide legend since all boxes are same series
-          customdata: [[d.mean, d.min, d.max, d.std, d.count]], // data for hover
-          // custom hover template showing temperature stats
+          showlegend: false, // avoid cluttered legend with 24 entries
+          customdata: [[d.mean, d.min, d.max, d.std, d.count]], // for hover tooltips
+          // detailed hover information for building operators
           hovertemplate: 
             '<b>Time:</b> %{x}<br>' +
             '<b>Mean Temperature:</b> %{customdata[0]:.1f}°C<br>' +
@@ -69,15 +72,15 @@ function BoxPlot({ selectedZone, selectedTimeRange }) {
   useEffect(() => {
     console.log('Component mounted, starting data load...');
 
-    // plotly layout configuration
+    // plotly layout configuration optimized for thermal comfort analysis
     const layoutConfig = {
       title: {
         text: `Temperature Variability - Zone ${selectedZone}`,
-        x: 0.5, // center title
+        x: 0.5, // centered title
       },
       yaxis: {
         title: 'Temperature (°C)',
-        range: [20, 27], // fixed range for temperature  
+        range: [20, 27], // focused range for hvac comfort zone
         gridcolor: '#E5E5E5',
         zeroline: false
       },
@@ -92,10 +95,10 @@ function BoxPlot({ selectedZone, selectedTimeRange }) {
       height: 750,
       width: 670,
       margin: { t: 80, b: 60, l: 80, r: 60 },
-      // reference lines for hvac setpoints
+      // reference lines showing hvac setpoints for context
       shapes: [
         {
-          // heating setpoint line (blue dashed)
+          // heating setpoint at 21°C
           type: 'line',
           x0: -0.5,
           x1: 23.5,
@@ -108,7 +111,7 @@ function BoxPlot({ selectedZone, selectedTimeRange }) {
           }
         },
         {
-          // cooling setpoint line (red dashed)
+          // cooling setpoint at 25°C
           type: 'line',
           x0: -0.5,
           x1: 23.5,
@@ -121,7 +124,7 @@ function BoxPlot({ selectedZone, selectedTimeRange }) {
           }
         }
       ],
-      // labels for the setpoint lines
+      // labels for the setpoint reference lines
       annotations: [
         {
           x: 21,  
@@ -145,13 +148,13 @@ function BoxPlot({ selectedZone, selectedTimeRange }) {
     };
     setLayout(layoutConfig);
 
-    // load csv data based on selected zone and time range
+    // dynamic file loading based on user selections
     console.log(`Loading data for zone ${selectedZone} and time range ${selectedTimeRange}`);
     const fileName = selectedTimeRange === 'month' ? `may_zone${selectedZone}.csv` : `lastquarter_zone${selectedZone}.csv`;
     const dataPath = `/data/thermal comfort/boxplot/${selectedTimeRange}/${fileName}`;
     console.log(`Loading data from: ${dataPath}`);
     
-    // use d3 to load and parse csv file
+    // d3 csv loading with error handling
     d3.csv(dataPath)
       .then(data => {
         console.log('Data loaded successfully:', data);
@@ -160,18 +163,18 @@ function BoxPlot({ selectedZone, selectedTimeRange }) {
       })
       .catch(error => {
         console.error('Error loading the CSV file:', error);
-      setError(error.message);
-    });
-  }, [selectedZone, selectedTimeRange]); // re-run when zone or time range changes
+        setError(error.message);
+      });
+  }, [selectedZone, selectedTimeRange]); // dependency array ensures re-fetch on prop changes
 
-  // error state display
+  // graceful error handling with user-friendly message
   if (error) {
     return <div className="p-4 text-red-600">Error loading data: {error}</div>;
   }
 
   return (
     <div className="w-full">
-      {/* render box plot when data is loaded */}
+      {/* conditional rendering prevents empty chart flash */}
       {traces.length > 0 && layout && (
         <div className="flex justify-center">
           <Plot

@@ -3,7 +3,8 @@ import Plot from 'react-plotly.js';
 import * as d3 from 'd3';
 
 function CO2History() {
-    // state management for component data and ui controls
+    // comprehensive state management for all component functionality
+    // separating concerns for better maintainability and debugging
     const [selectedTimeRange, setSelectedTimeRange] = useState('12hours');
     const [selectedFloor, setSelectedFloor] = useState('0');
     const [data, setData] = useState([]);
@@ -11,10 +12,12 @@ function CO2History() {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    // available floor options for dropdown
+    // floor configuration - using '0' for lobby is more intuitive than 'ground'
+    // matches your building's actual floor numbering system
     const floors = ['0', '25', '26', '27', '28', '29', '30'];
 
-    // time range filter options
+    // time range options for different analysis needs
+    // 12/24 hour views provide different levels of detail for facility managers
     const timeRanges = [
         { value: '12hours', label: 'Last 12 Hours' },
         { value: '24hours', label: 'Last 24 Hours' }
@@ -25,49 +28,56 @@ function CO2History() {
             setIsLoading(true);
             setError(null);
             try {
-                // construct file path based on selected filters
+                // dynamic file path construction based on user selections
+                // follows your established data organization pattern
                 const fileName = `co2history_floor${selectedFloor}.csv`;
                 const dataPath = `/data/air quality/history/${selectedTimeRange}/${fileName}`;
                 const csvData = await d3.csv(dataPath);
+                
+                // validate data exists before processing
                 if (!csvData || csvData.length === 0) {
                     throw new Error('No data available for the selected parameters');
                 }
 
-                // clean data by removing duplicates and empty entries
+                // data cleaning to handle duplicate timestamps and missing values
+                // important for sensor data which can have irregular collection patterns
                 const seen = new Set();
                 const filtered = csvData.filter(d => {
-                    const t = d.time || d.hour || d.timestamp;
+                    const t = d.time || d.hour || d.timestamp; // flexible column naming
                     if (!t || seen.has(t)) return false;
                     seen.add(t);
                     return true;
                 });
+                
+                // extract time and co2 values with type conversion
                 const times = filtered.map(d => d.time || d.hour || d.timestamp);
-                const co2 = filtered.map(d => +d.co2);
+                const co2 = filtered.map(d => +d.co2); // ensure numeric values
 
-                // create plotly line chart data
+                // plotly line chart configuration for time series data
                 const plotData = [{
                     x: times,
                     y: co2,
                     type: 'scatter',
                     mode: 'lines',
-                    line: { color: '#79D7B3' }, // green line color
+                    line: { color: '#79D7B3' }, // green theme consistent with your dashboard
                     name: 'CO₂ ppm'
                 }];
 
-                // configure chart layout and styling
+                // comprehensive layout configuration for professional appearance
                 const layoutConfig = {
                     title: {
+                        // dynamic title reflecting current filter selections
                         text: `CO₂ History; ${timeRanges.find(t => t.value === selectedTimeRange)?.label || ''}${selectedFloor !== 'all' ? ` - Floor ${selectedFloor}` : ''}`,
-                        x: 0.5 // center title
+                        x: 0.5 // centered title
                     },
                     xaxis: {
                         title: 'Hour of Day',
                         tickmode: 'array',
-                        // show every other tick for 24hr view to avoid crowding
+                        // intelligent tick spacing - fewer ticks for 24hr view to prevent crowding
                         tickvals: selectedTimeRange === '24hours' 
                             ? times.filter((_, i) => i % 2 === 0)
                             : times,
-                        // convert 24hr format to 12hr am/pm format
+                        // convert 24-hour format to user-friendly 12-hour am/pm display
                         ticktext: (selectedTimeRange === '24hours' 
                             ? times.filter((_, i) => i % 2 === 0)
                             : times).map(t => {
@@ -76,15 +86,16 @@ function CO2History() {
                                 if (hour === 12) return '12 PM';
                                 return hour > 12 ? `${hour - 12} PM` : `${hour} AM`;
                             }),
-                        type: 'category',
+                        type: 'category', // categorical x-axis for hour labels
                     },
                     yaxis: {
                         title: 'CO₂ Concentration (ppm)',
-                        // dynamic y-axis range based on data with min/max bounds
+                        // dynamic y-axis range with sensible min/max bounds
+                        // ensures chart always shows meaningful scale
                         range: [Math.min(...co2, 400), Math.max(...co2, 800)]
                     },
                     height: 550,
-                    width: 1356,
+                    width: 1356, // wide format suitable for dashboard integration
                     plot_bgcolor: 'white',
                     paper_bgcolor: 'white'
                 };
@@ -93,6 +104,7 @@ function CO2History() {
                 setLayout(layoutConfig);
                 setError(null);
             } catch (error) {
+                // comprehensive error handling with user-friendly messages
                 setError(error.message);
                 setData([]);
                 setLayout(null);
@@ -101,13 +113,13 @@ function CO2History() {
             }
         };
         loadData();
-    }, [selectedTimeRange, selectedFloor]); // reload when filters change
+    }, [selectedTimeRange, selectedFloor]); // dependency array ensures data refresh on filter changes
 
     return (
         <div>
-            {/* filter controls section */}
+            {/* filter controls section using your established styling patterns */}
             <div className="filter-controls flex gap-4 mb-4">
-                {/* time range dropdown */}
+                {/* time range selection dropdown */}
                 <div className="filter-group">
                     <label htmlFor="time-range-select" className="block text-sm font-medium mb-1">
                         Time Range
@@ -125,7 +137,8 @@ function CO2History() {
                         ))}
                     </select>
                 </div>
-                {/* floor selection dropdown */}
+                
+                {/* floor selection dropdown with friendly naming */}
                 <div className="filter-group">
                     <label htmlFor="floor-select" className="block text-sm font-medium mb-1">
                         Floor
@@ -138,6 +151,7 @@ function CO2History() {
                     >
                         {floors.map((floor) => (
                             <option key={floor} value={floor}>
+                                {/* user-friendly floor naming */}
                                 {floor === '0' ? 'Lobby' : `Floor ${floor}`}
                             </option>
                         ))}
@@ -145,32 +159,36 @@ function CO2History() {
                 </div>
             </div>
 
-            {/* chart display area with loading/error states */}
+            {/* chart display area with comprehensive state handling */}
             <div style={{ minHeight: 550, position: 'relative' }}>
-                {/* loading overlay */}
+                {/* loading state overlay */}
                 {isLoading && (
                     <div style={{
                         position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         background: 'white', zIndex: 2
                     }}>
+                        {/* loading indicator could be added here */}
                     </div>
                 )}
-                {/* render chart when data is loaded successfully */}
+                
+                {/* successful data display */}
                 {!isLoading && !error && data.length > 0 && layout && (
                     <Plot 
                         data={data} 
                         layout={layout}
-                        config={{ responsive: true }}
+                        config={{ responsive: true }} // responsive design for different screen sizes
                     />
                 )}
-                {/* no data message */}
+                
+                {/* empty state message */}
                 {!isLoading && !error && data.length === 0 && (
                     <div className="text-gray-600 p-4 text-center">
                         No data available for the selected parameters
                     </div>
                 )}
-                {/* error message display */}
+                
+                {/* error state display */}
                 {error && (
                     <div className="text-red-600 mb-4 p-4 bg-red-50 rounded">
                         Error loading data: {error}

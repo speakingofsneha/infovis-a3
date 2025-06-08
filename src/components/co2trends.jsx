@@ -3,7 +3,8 @@ import Plot from 'react-plotly.js';
 import * as d3 from 'd3';
 
 function CO2Trends() {
-    // component state for managing ui controls and data
+    // comprehensive state management for all component functionality
+    // keeping loading, error, and data states separate for better debugging and user experience
     const [selectedTimeRange, setSelectedTimeRange] = useState('daily');
     const [selectedFloor, setSelectedFloor] = useState('0');
     const [data, setData] = useState([]);
@@ -11,26 +12,29 @@ function CO2Trends() {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    // available building floors for selection
+    // building floor configuration - using '0' for lobby makes more sense than 'ground'
+    // matches your building's actual numbering system for consistency
     const floors = ['0', '25', '26', '27', '28', '29', '30'];
 
-    // time aggregation options for trend analysis
+    // time aggregation options for different analysis granularities
+    // daily/weekly/monthly views provide different insights for facility managers
     const timeRanges = [
         { value: 'daily', label: 'Daily' },
         { value: 'weekly', label: 'Weekly' },
         { value: 'monthly', label: 'Monthly' }
     ];
 
-    // utility function to format dates based on selected time range
+    // utility function for smart date formatting based on selected time range
+    // using d3's time formatting for consistent, readable date displays
     const formatDate = (dateStr, timeRange) => {
         const date = new Date(dateStr);
         switch(timeRange) {
             case 'daily':
-                return d3.timeFormat('%b %d')(date); // format as "may 29"
+                return d3.timeFormat('%b %d')(date); // "may 29" format
             case 'weekly':
-                return d3.timeFormat('%b %d')(date); // format as "may 29" (week start)
+                return d3.timeFormat('%b %d')(date); // week start date
             case 'monthly':
-                return d3.timeFormat('%B')(date); // format as "may"
+                return d3.timeFormat('%B')(date); // full month name
             default:
                 return dateStr;
         }
@@ -41,15 +45,19 @@ function CO2Trends() {
             setIsLoading(true);
             setError(null);
             try {
-                // construct file path based on user selections
+                // dynamic file path construction following your established data organization
+                // url encoding for spaces in path ensures proper file access
                 const fileName = `co2trends_floor${selectedFloor}.csv`;
-                const dataPath = `/data/air quality/trends/${selectedTimeRange}/${fileName}`;
+                const dataPath = `/data/air%20quality/trends/${selectedTimeRange}/${fileName}`;
                 const csvData = await d3.csv(dataPath);
+                
+                // validate data exists before processing - prevents downstream errors
                 if (!csvData || csvData.length === 0) {
                     throw new Error('No data available for the selected parameters');
                 }
 
-                // determine x-axis labels based on time range selection
+                // smart x-axis label generation based on time range selection
+                // different time ranges use different date column names in the csv
                 let xLabels;
                 if (selectedTimeRange === 'daily') {
                     xLabels = csvData.map(d => formatDate(d.date, 'daily'));
@@ -59,12 +67,14 @@ function CO2Trends() {
                     xLabels = csvData.map(d => formatDate(d.month, 'monthly'));
                 }
 
-                // extract percentage values for each air quality category
+                // extract percentage values for air quality categories
+                // these represent time spent in each co2 range - excellent/fair/needs improvement
                 const excellent = csvData.map(d => +d.excellent); // <= 600ppm
                 const fair = csvData.map(d => +d.fair); // 600-1000ppm
                 const needsImprovement = csvData.map(d => +d.needs_improvement); // > 1000ppm
 
-                // create stacked bar chart data for plotly
+                // create stacked bar chart data using traffic light color system
+                // green/yellow/red for intuitive understanding of air quality levels
                 const plotData = [
                     {
                         x: xLabels,
@@ -72,7 +82,7 @@ function CO2Trends() {
                         name: 'Excellent (<= 600ppm)',
                         type: 'bar',
                         marker: { color: '#5ABA8A' }, // green for good air quality
-                        // custom hover template with styling
+                        // rich hover templates with color-coded styling for better user experience
                         hovertemplate: '<b style="color: #5ABA8A">%{x}</b><br>' +
                             '<span style="color: #5ABA8A">Excellent: %{y:.1f}%</span><br>' +
                             '<span style="color: #5ABA8A">CO₂ ≤ 600 ppm</span><br>' +
@@ -102,15 +112,15 @@ function CO2Trends() {
                     }
                 ];
 
-                // configure chart layout and styling
+                // comprehensive layout configuration for professional dashboard appearance
                 const layoutConfig = {
-                    barmode: 'stack', // stack bars to show 100% breakdown
+                    barmode: 'stack', // stacked bars show 100% breakdown of time spent in each category
                     title: {
-                        // dynamic title based on selections
+                        // dynamic title reflecting current filter selections for context
                         text: `${selectedTimeRange.charAt(0).toUpperCase() + selectedTimeRange.slice(1)} Air Quality Breakdown (CO₂)${selectedFloor !== 'all' ? ` - ${selectedFloor === '0' ? 'Lobby' : `Floor ${selectedFloor}`}` : ''}`,
-                        x: 0.5 // center title
+                        x: 0.5 // centered title
                     },
-                    hovermode: 'closest', // show hover for closest data point
+                    hovermode: 'closest', // show hover for nearest data point
                     hoverlabel: {
                         bgcolor: 'white',
                         bordercolor: 'lightgray',
@@ -119,25 +129,25 @@ function CO2Trends() {
                     },
                     xaxis: {
                         title: selectedTimeRange.charAt(0).toUpperCase() + selectedTimeRange.slice(1),
-                        tickangle: 0, // horizontal tick labels
+                        tickangle: 0, // horizontal labels for better readability
                         tickfont: {
                             size: 12
                         }
                     },
                     yaxis: {
                         title: 'Percent Time',
-                        range: [0, 100] // percentage scale
+                        range: [0, 100] // fixed percentage scale for consistency
                     },
                     legend: {
-                        orientation: 'v', // vertical legend
-                        x: 1.05, // position to right of chart
+                        orientation: 'v', // vertical legend on the right
+                        x: 1.05, // positioned outside chart area
                         y: 1
                     },
                     margin: {
-                        r: 120 // extra right margin for legend
+                        r: 120 // extra right margin to accommodate legend
                     },
                     height: 750,
-                    width: 1356,
+                    width: 1356, // wide format optimized for dashboard integration
                     plot_bgcolor: 'white',
                     paper_bgcolor: 'white'
                 };
@@ -146,6 +156,7 @@ function CO2Trends() {
                 setLayout(layoutConfig);
                 setError(null);
             } catch (error) {
+                // comprehensive error handling with user-friendly messages
                 setError(error.message);
                 setData([]);
                 setLayout(null);
@@ -154,11 +165,11 @@ function CO2Trends() {
             }
         };
         loadData();
-    }, [selectedTimeRange, selectedFloor]); // re-run when filters change
+    }, [selectedTimeRange, selectedFloor]); // dependency array ensures data refresh on filter changes
 
     return (
         <div>
-            {/* filter controls section */}
+            {/* filter controls section using consistent styling patterns */}
             <div className="filter-controls flex gap-4 mb-4">
                 {/* time range selection dropdown */}
                 <div className="filter-group">
@@ -178,7 +189,8 @@ function CO2Trends() {
                         ))}
                     </select>
                 </div>
-                {/* floor selection dropdown */}
+                
+                {/* floor selection dropdown with user-friendly naming */}
                 <div className="filter-group">
                     <label htmlFor="floor-select" className="block text-sm font-medium mb-1">
                         Floor
@@ -191,6 +203,7 @@ function CO2Trends() {
                     >
                         {floors.map((floor) => (
                             <option key={floor} value={floor}>
+                                {/* converting technical floor numbers to user-friendly names */}
                                 {floor === '0' ? 'Lobby' : `Floor ${floor}`}
                             </option>
                         ))}
@@ -198,9 +211,9 @@ function CO2Trends() {
                 </div>
             </div>
 
-            {/* chart display area with conditional rendering */}
+            {/* chart display area with comprehensive state handling */}
             <div style={{ minHeight: 750, position: 'relative' }}>
-                {/* loading state with overlay */}
+                {/* loading state with informative message */}
                 {isLoading ? (
                     <div style={{
                         position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
@@ -210,15 +223,15 @@ function CO2Trends() {
                         <div className="text-gray-600">Loading chart data...</div>
                     </div>
                 ) : error ? (
-                    // error state display
+                    // error state with clear messaging
                     <div className="text-red-600 mb-4 p-4 bg-red-50 rounded">
                         Error loading data: {error}
                     </div>
                 ) : data.length > 0 && layout ? (
-                    // successful data load - render chart
+                    // successful data load - render stacked bar chart
                     <Plot data={data} layout={layout} config={{ responsive: true }} />
                 ) : (
-                    // no data available message
+                    // empty state message
                     <div className="text-gray-600 p-4 text-center">
                         No data available for the selected parameters
                     </div>

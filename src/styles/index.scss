@@ -1,218 +1,206 @@
-// CSS custom properties for consistent layout dimensions across the dashboard
+@use '../styles/base.scss' as *;
+
 :root {
-  --sidebar-width: 70px;
-  --topbar-height: 80px;
+	--accent: #A89CDA;
+	--dark: #4B4A4A;
+	--tenary: #F7F7F7;
 }
 
-// Global body styling with custom font and light background
-body {
-margin: 0;
-font-family: 'Apercu Pro Regular', sans-serif;
-background: #f8f9fa;
+html, body {
+	font-family: 'Apercu Pro';
+	margin: 0px;
+	scroll-behavior: smooth;
+	background: #F7F7F7;
 }
 
-// Main content area with sidebar offset and full viewport height
-.main-content {
-margin-left: var(--sidebar-width);
-height: 100vh;
-display: flex;
-flex-direction: column;
+.block {
+	display: block;
 }
 
-// Sticky header with shadow and branding
-.topbar {
-position: sticky;
-top: 0;
-background: white;
-border-bottom: 1px solid #e9ecef;
-box-shadow: inset -3px 0 4px rgba(0, 0, 0, 0.05);
-padding: 20px 48px;
-z-index: 100;
-
-h1 {
-  font-size: 1.5rem;
-  font-weight: normal;
-  margin: 0 0 0 0;
-  color: #2c3e50;
+.flex {
+	display: flex;
+	&.center {
+		justify-content: center;
+	}
 }
 
-.highlight {
-  color: #928BBB;
-}
-}
-
-// Timestamp styling for data freshness indication
-.last-updated {
-color: #A5A5A5;
-margin-bottom: 1em;
-font-size: 0.9rem;
+.text-container {
+	max-width: 600px;
+	margin: 50px auto;
 }
 
-// Scrollable dashboard content area
-.dashboard {
-flex: 1;
-overflow-y: auto;
-padding: 32px 48px;
-background: #F7F7F7;
+.h1-title, .h2-title, .s-subtitle, .l-subtitle {
+	font-weight: 500;
 }
 
-// Summary section layout with consistent spacing
-.summary {
-display: flex;
-gap: 2rem;
-margin-bottom: 2rem;
+.h1-title {
+	font-size: 4rem;
 }
 
-// Base card styling shared across all dashboard cards
-.card-base {
-background: #fff;
-border-radius: 0.3125rem;
-box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-padding: 24px 32px;
-height: 10rem;
-display: flex;
-flex-direction: column;
-justify-content: center;
-box-sizing: border-box;
+.h2-title {
+	font-size: 2.2rem;
 }
 
-// Overall score card with circular indicator
-.score-card {
-@extend .card-base;
-width: 17.5rem;
-flex-direction: row;
-align-items: center;
-gap: 1.5rem;
+.h3-title {
+	font-size: 2.2rem;
+    font-family: 'Apercu Pro Medium';
 }
 
-.score-circle {
-background: #85BB8B;
-color: #fff;
-font-size: 2rem;
-border-radius: 50%;
-width: 6.25rem;
-height: 6.25rem;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-shrink: 0;
+.product-intro {
+	padding-bottom: 20px;
+	margin-bottom: 0;
+	width: 60%;
+	margin: 0 auto; 
 }
 
-.score-label {
-color: rgba(75, 74, 74, 0.50);
-font-size: 1rem;
-font-style: normal;
-line-height: normal;
-margin-bottom: 0.8rem;
+.l-subtitle {
+	font-size: 1.9rem;
 }
 
-.score-status {
-color: #4B4A4A;
-font-size: 2rem;
-font-style: normal;
-line-height: normal;
+.s-margin {
+	margin-bottom: 5px;
 }
 
-// Interactive metric cards with hover effects for navigation
-.metric-card {
-@extend .card-base;
-cursor: pointer;
-text-decoration: none;
-color: inherit;
-
-&:hover, &:focus {
-  box-shadow: 0 4px 16px rgba(106, 90, 205, 0.10), 0 1.5px 7px rgba(0, 0, 0, 0.06);
-  transform: translateY(-2px) scale(1.02);
-  outline: none;
+.m-margin {
+	margin-bottom: 2rem;
 }
 
-.card-title {
-  color: rgba(75, 74, 74, 0.50);
-  font-size: 0.95rem;
-  font-family: 'Apercu Pro Regular', sans-serif;
-  font-weight: 500;
-  margin: 0 -32px 20px -32px;
-  padding: 0 32px 1rem 32px;
-  border-bottom: 1.2px solid #DCD9D9;
-  margin-top: -0.5rem;
+.md-width {
+	width: 400px;
+	max-width: 100%;
+	height: auto;
 }
 
-.card-metrics {
-  display: flex;
-  gap: 3rem;
-  align-items: flex-start;
+.s-paragraph {
+	font-size: 1.3rem;
 }
 
-.metric-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  .metric-value {
-    margin-bottom: 10px;
-    line-height: 1;
-
-    .value-main {
-      color: #4B4A4A;
-      font-size: 2rem;
-      font-family: 'Apercu Pro Regular', sans-serif;
-    }
-
-    .value-unit {
-      color: #4B4A4A;
-      font-size: 1rem;
-      font-family: 'Apercu Pro Regular', sans-serif;
-    }
-
-    // Variable unit sizes for different metric types
-    &.pmv .value-unit { font-size: 30px; }
-    &.temp .value-unit { font-size: 20px; }
-    &.humidity .value-unit,
-    &.speed .value-unit { font-size: 18px; }
-  }
-
-  .metric-label {
-    color: rgba(75, 74, 74, 0.70);
-    font-size: 0.9rem;
-    text-align: center;
-    margin: auto;
-    font-family: 'Apercu Pro Regular', sans-serif;
-  }
-}
+p {
+	font-size: 1.8rem;
 }
 
-// Specific width modifiers for different card types based on content
-.metric-card.thermal { width: 29rem; }
-.metric-card.air     { width: 10.6rem; }
-.metric-card.env     { width: 15rem; }
-
-// Back button styling for navigation
-.back-button {
-color: #4B4A4A;
-text-decoration: none;
-
-&:hover {
-  text-decoration: none;
-}
+.button {
+	border-radius: 8px;
+	&.button-primary, &.button-primary:hover, &.button-primary:focus {
+		background: var(--accent);
+		border: var(--accent);
+	}
+	&:hover {
+		opacity: .8;
+	}
 }
 
-// Layout containers for chart components
-.charts-container {
-display: flex;
-flex-direction: row;
-gap: 1rem;
-align-items: flex-start;
+section {
+	padding: 70px 0;
 }
 
-.trends-container {
-display: flex;
-margin-top: 1rem;
+.center {
+	text-align: center;
 }
 
-// Disable hover effects for non-interactive environment card
-.metric-card.environment-width:hover,
-.metric-card.environment-width:focus {
-box-shadow: none;
-transform: none;
-outline: none;
+.product-cta {
+	max-width: 250px;
+	margin: 0 auto;
+	text-align: center;
+
+	.button {
+		margin-bottom: 16px;
+	}
 }
+
+// Header Styles
+.logo-image {
+	width: 28px;
+	height: 28px;
+    margin-left:60px;
+    margin-top: 25px;
+}
+
+.logo-text {
+    font-size: 1.2em;
+    margin-left: 100px;
+    margin-top: -35px;
+}
+
+// Hero Styles
+.product-hero {
+	padding: 50px 0;
+	.container {
+		position: relative;
+		.d-table {
+			height: auto; // Changed from 500px to auto
+		}
+	}
+	.hero-copy {
+		h1, p {
+			max-width: 600px;
+			margin: 20px auto;
+		}
+	}
+	.hero-media {
+		margin-top: 20px; // Add some spacing above the mockup
+		img {
+			// Remove all the absolute positioning styles
+			width: 160px;
+			display: block;
+			margin: 0 auto;
+		}
+	}
+}
+
+.hero-media .device-mockup {
+	width: 1000px !important;
+	max-width: 100%;
+	height: auto;
+    margin: 0 auto 0; 
+}
+
+// Brief Styles
+.product-brief {
+	padding-top: 20px;
+	margin-top: 0;
+	background-color: var(--tenary);
+	.hero-brand {
+		padding-bottom: 50px;
+		.brands {
+			margin-top: 15px;
+		}
+	}
+	.product-brief-items {
+		margin-bottom: 100px;
+		.brief-tab {
+			padding-top: 50px;
+		}
+	}
+
+	.feature-grid {
+		display: flex;
+		p {
+			margin: 0 0 0 10px;
+		}
+		img {
+			width: 25px;
+			margin-top: -10px;
+		}
+	}
+
+	.brief-media {
+		background: transparent !important;
+		position: relative;
+		overflow: hidden;
+		padding-top: 40px;
+	}
+
+	.brief-media img {
+		width: 400px;
+		max-width: 100%;
+		height: auto;
+	}
+}
+
+.product-cta .hero-media .device-mockup {
+	width: 400px !important;
+	max-width: 100%;
+	height: auto;
+}
+

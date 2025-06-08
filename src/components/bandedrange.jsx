@@ -1,6 +1,9 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 
+// calculations below are based on the following paper: https://comfort.arup.com/Predicting%20Thermal%20Comfort%20for%20Diverse%20Populations.pdf 
+// and lots of perplexity + chatgpt 🙏 
+
 function BandedRange() {
     // array of demographic groups with their comfort temperature centers and colors
     const demographics = [

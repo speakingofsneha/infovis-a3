@@ -1,0 +1,499 @@
+// CSS custom properties for consistent layout dimensions across the dashboard
+:root {
+  --sidebar-width: 70px;
+  --topbar-height: 80px;
+}
+
+// Global body styling with custom font and light background
+body {
+margin: 0;
+font-family: 'Apercu Pro Regular', sans-serif;
+background: #f8f9fa;
+}
+
+// Main content area with sidebar offset and full viewport height
+.main-content {
+margin-left: var(--sidebar-width);
+height: 100vh;
+display: flex;
+flex-direction: column;
+}
+
+// Sticky header with shadow and branding
+.topbar {
+position: sticky;
+top: 0;
+background: white;
+border-bottom: 1px solid #e9ecef;
+box-shadow: inset -3px 0 4px rgba(0, 0, 0, 0.05);
+padding: 20px 48px;
+z-index: 100;
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin: 0 0 0 0;
+  color: #2c3e50;
+}
+
+.highlight {
+  color: #928BBB;
+}
+}
+
+// Timestamp styling for data freshness indication
+.last-updated {
+color: #A5A5A5;
+margin-bottom: 1em;
+font-size: 0.9rem;
+}
+
+// Scrollable dashboard content area
+.dashboard {
+flex: 1;
+overflow-y: auto;
+padding: 32px 48px;
+background: #F7F7F7;
+}
+
+// Summary section layout with consistent spacing
+.summary {
+display: flex;
+gap: 2rem;
+margin-bottom: 2rem;
+}
+
+// Base card styling shared across all dashboard cards
+.card-base {
+background: #fff;
+border-radius: 0.3125rem;
+box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+padding: 24px 32px;
+height: 10rem;
+display: flex;
+flex-direction: column;
+justify-content: center;
+box-sizing: border-box;
+}
+
+// Overall score card with circular indicator
+.score-card {
+@extend .card-base;
+width: 17.5rem;
+flex-direction: row;
+align-items: center;
+gap: 1.5rem;
+}
+
+.score-circle {
+background: #85BB8B;
+color: #fff;
+font-size: 2rem;
+border-radius: 50%;
+width: 6.25rem;
+height: 6.25rem;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+}
+
+.score-label {
+color: rgba(75, 74, 74, 0.50);
+font-size: 1rem;
+font-style: normal;
+line-height: normal;
+margin-bottom: 0.8rem;
+}
+
+.score-status {
+color: #4B4A4A;
+font-size: 2rem;
+font-style: normal;
+line-height: normal;
+}
+
+// Interactive metric cards with hover effects for navigation
+.metric-card {
+@extend .card-base;
+cursor: pointer;
+text-decoration: none;
+color: inherit;
+
+&:hover, &:focus {
+  box-shadow: 0 4px 16px rgba(106, 90, 205, 0.10), 0 1.5px 7px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px) scale(1.02);
+  outline: none;
+}
+
+.card-title {
+  color: rgba(75, 74, 74, 0.50);
+  font-size: 0.95rem;
+  font-family: 'Apercu Pro Regular', sans-serif;
+  font-weight: 500;
+  margin: 0 -32px 20px -32px;
+  padding: 0 32px 1rem 32px;
+  border-bottom: 1.2px solid #DCD9D9;
+  margin-top: -0.5rem;
+}
+
+.card-metrics {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.metric-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .metric-value {
+    margin-bottom: 10px;
+    line-height: 1;
+
+    .value-main {
+      color: #4B4A4A;
+      font-size: 2rem;
+      font-family: 'Apercu Pro Regular', sans-serif;
+    }
+
+    .value-unit {
+      color: #4B4A4A;
+      font-size: 1rem;
+      font-family: 'Apercu Pro Regular', sans-serif;
+    }
+
+    // Variable unit sizes for different metric types
+    &.pmv .value-unit { font-size: 30px; }
+    &.temp .value-unit { font-size: 20px; }
+    &.humidity .value-unit,
+    &.speed .value-unit { font-size: 18px; }
+  }
+
+  .metric-label {
+    color: rgba(75, 74, 74, 0.70);
+    font-size: 0.9rem;
+    text-align: center;
+    margin: auto;
+    font-family: 'Apercu Pro Regular', sans-serif;
+  }
+}
+}
+
+// Specific width modifiers for different card types based on content
+.metric-card.thermal { width: 29rem; }
+.metric-card.air     { width: 10.6rem; }
+.metric-card.env     { width: 15rem; }
+
+// Back button styling for navigation
+.back-button {
+color: #4B4A4A;
+text-decoration: none;
+
+&:hover {
+  text-decoration: none;
+}
+}
+
+// Layout containers for chart components
+.charts-container {
+display: flex;
+flex-direction: row;
+gap: 1rem;
+align-items: flex-start;
+}
+
+.trends-container {
+display: flex;
+margin-top: 1rem;
+}
+
+// Disable hover effects for non-interactive environment card
+.metric-card.environment-width:hover,
+.metric-card.environment-width:focus {
+box-shadow: none;
+transform: none;
+outline: none;
+}
+
+.advanced-filters {
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 24px;
+  margin-bottom: 20px;
+  max-width: 700px;
+  box-sizing: border-box;
+  font-family: 'Apercu Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+
+  .top-bar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    &.collapsed {
+      margin-bottom: 0;
+    }
+
+    &.expanded {
+      margin-bottom: 32px;
+    }
+  }
+
+  .top-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 0;
+  }
+
+  .advanced-content {
+    .advanced-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 24px;
+      margin-top: 32px;
+      margin-bottom: 32px;
+    }
+
+    .temperature-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      margin-top: 32px;
+    }
+  }
+
+  .field-group {
+    min-width: 160px;
+
+    &--wide {
+      min-width: 180px;
+    }
+
+    &--small {
+      min-width: 120px;
+    }
+  }
+
+  .field-label {
+    font-size: 0.9em;
+    color: #374151;
+    margin-bottom: 6px;
+    display: block;
+    font-family: 'Apercu Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .dropdown {
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 2px;
+    background: #ffffff;
+    font-size: 0.9em;
+    color: #374151;
+    appearance: none;
+    box-sizing: border-box;
+    height: 48px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease;
+    font-family: 'Apercu Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    &:hover {
+      border-color: #9ca3af;
+    }
+
+    &:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 1px #6366f1;
+    }
+  }
+
+  .dropdown-arrow {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .toggle-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 2px;
+    background: #ffffff;
+    color: #6b7280;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    box-sizing: border-box;
+    height: 48px;
+    outline: none;
+    transition: all 0.2s ease;
+    font-family: 'Apercu Pro';
+    margin-top: 0;
+
+    &:hover {
+      background-color: #f9fafb;
+      border-color: #9ca3af;
+    }
+
+    &:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 1px #6366f1;
+    }
+  }
+
+  .filter-icon {
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  .separator {
+    color: #9ca3af;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    min-width: 24px;
+    margin: 0 8px;
+  }
+}
+
+.uncomfortable-spaces-table {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 32px;
+  max-width: 700px;
+  font-family: 'Apercu Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  .table-title {
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+    color: #4B4A4A;
+  }
+
+  .data-table {
+    font-size: 1rem;
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+
+    .table-header {
+      text-align: center;
+      font-weight: normal;
+      padding: 12px 16px;
+      background: #fafbfc;
+      border-bottom: 2px solid #e5e7eb;
+      border-right: 1px solid #e5e7eb;
+      font-size: 0.9rem;
+      color: #4B4A4A;
+
+      &--zone {
+        width: 90px;
+      }
+
+      &--discomfort {
+        width: 180px;
+      }
+
+      &--trend {
+        width: 140px;
+      }
+
+      &--priority {
+        width: 120px;
+        border-right: 1px solid #e5e7eb;
+      }
+    }
+
+    .table-row {
+      &:hover {
+        background-color: #f8f9fa;
+      }
+    }
+
+    .table-cell {
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      color: #4B4A4A;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      border-right: 1px solid #e5e7eb;
+      text-align: center;
+
+      &--zone {
+        width: 90px;
+      }
+
+      &--discomfort {
+        width: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      &--trend {
+        width: 140px;
+      }
+
+      &--priority {
+        width: 120px;
+        border-right: none;
+      }
+    }
+  }
+
+  .discomfort-value {
+    color: #4B4A4A;
+    min-width: 32px;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .progress-bar {
+    display: inline-block;
+    height: 12px;
+    width: 90px;
+    background: #ececec;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.3s ease;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+
+  .priority-text {
+    
+    &:contains('Critical') {
+      color: #dc2626;
+    }
+    
+    &:contains('High') {
+      color: #ea580c;
+    }
+    
+    &:contains('Medium') {
+      color: #ca8a04;
+    }
+  }
+}

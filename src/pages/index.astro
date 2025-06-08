@@ -1,121 +1,127 @@
 ---
-// importing the sidebar layout component
-import Sidebar from '../layouts/sidebar.astro';
-// importing main stylesheet
+// landing page styles https://saaslandingpage.com/
+// inspired by https://useportal.net/
 import '../styles/index.scss';
-// importing react component for thermal comfort table
-import ThermalComfortTable from '../components/uncomfylb.jsx';
 ---
 
-
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IEQ Dashboard</title>
-    <!-- google fonts for material icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
-  </head>
-  <body>
-    <!-- sidebar navigation component -->
-    <Sidebar />
-    
-    <div class="main-content">
-      <!-- sticky header bar at top -->
-      <div class="topbar">
-        <h1>welcome back, <span class="highlight">kaz!</span></h1>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Idol is an elegant landing page template for micro SaaS products built with AstroJS & Skeleton CSS">
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Atmos</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+	</head>
+	<body>
+		<!-- Header Component -->
+		<header class="nav">
+      <img class="logo-image" src="/favicon.png" alt="favicon">
+      <p class="logo-text">Atmos</p>
+		</header>
+
+		<!-- Hero Component -->
+<!-- Hero Component -->
+<section class="product-hero">
+	<div class="container">
+		<div class="d-table">
+			<div class="d-table-cell center">
+				<div class="hero-copy">
+					<h1 class="h1-title">The dashboard for equitable environments</h1>
+					<p> Atmos helps you manage, compare and analyse indoor environment data all in one place, to help maintain spaces that are comfortable for <i>all.</i></p>
+					<div class="product-cta">
+						<a href="/analytics" class="button button-primary u-full-width" target="_blank">View Demo</a>
+					</div>
+          <div class="hero-media">
+            <img src="/public/assets/hero.png" alt="device mockup" class="device-mockup">
+          </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+    <!-- Intro Component -->
+    <section class="product-intro">
+      <div class="container">
+        <h3 class="h2-title">The problem</h3>
+        <p class="m-paragraph m-margin">The thermal comfort models guiding most buildings are based on 1960s-era studies of college-aged men from northern Europe and America, 
+          leaving out the needs of diverse populations. Designing for a single "average person" isn't equitable—because that person doesn't exist—yet buildings are still 
+          cooled, heated, and ventilated as if they do. So, how can we better represent and design for an entire population?</p>
+        <hr>
+        <h3 class="h2-title">Introducing atmos</h3>
+        <p class="m-paragraph m-margin">A dashboard that analyzes real-world indoor environment data to reveal how different people experience your spaces. Our platform lets you:</p>
       </div>
+    </section>
+    
+		<!-- Brief Component -->
+		<section class="product-brief" id="features">
+			<div class="container">
 
-      <!-- main dashboard content area -->
-      <main class="dashboard">
-        <!-- timestamp showing last data update -->
-        <p class="last-updated">Last updated: 5:34 pm</p>
-          
-          <!-- summary section with overall score and metric cards -->
-          <section class="summary">
-            <!-- circular score display showing overall rating -->
-            <div class="score-card">
-              <div class="score-circle">82</div>
-              <div>
-                <div class="score-label">overall rating</div>
-                <div class="score-status">Good</div>
-              </div>
-            </div>
-          
-            <!-- thermal comfort card - clickable link to detail page -->
-            <a href="/thermalcomf" class="metric-card thermal-comfort-width" title="View Thermal Comfort details">
-              <div class="card-title">Thermal Comfort</div>
-              <div class="card-metrics">
-                <!-- air temperature metric -->
-                <div class="metric-group">
-                  <div class="metric-value temp">
-                    <span class="value-main">22.1</span><span class="value-unit">°c</span>
-                  </div>
-                  <div class="metric-label">air temp</div>
-                </div>
-                <!-- humidity percentage -->
-                <div class="metric-group">
-                  <div class="metric-value humidity">
-                    <span class="value-main">54</span><span class="value-unit">%</span>
-                  </div>
-                  <div class="metric-label">humidity</div>
-                </div>
-                <!-- air speed measurement -->
-                <div class="metric-group">
-                  <div class="metric-value speed">
-                    <span class="value-main">.05</span><span class="value-unit">m/s</span>
-                  </div>
-                  <div class="metric-label">air speed</div>
-                </div>
-                <!-- predicted mean vote comfort index -->
-                <div class="metric-group">
-                  <div class="metric-value pmv">
-                    <span class="value-main">-0.6</span>
-                  </div>
-                  <div class="metric-label">pmv</div>
-                </div>
-              </div>
-            </a>
-          
-            <!-- air quality card with co2 levels -->
-            <a href="/airq" class="metric-card air-quality-width" title="View Air Quality details">
-              <div class="card-title">Air Quality</div>
-              <div class="card-metrics">
-                <div class="metric-group">
-                  <div class="metric-value">
-                    <span class="value-main">4.5</span><span class="value-unit">ppm</span>
-                  </div>
-                  <div class="metric-label">co₂</div>
-                </div>
-              </div>
-            </a>
-          
-            <!-- environment card with light and sound levels -->
-            <a class="metric-card environment-width" title="View Environment details">
-              <div class="card-title">Environment</div>
-              <div class="card-metrics">
-                <!-- light level in lux -->
-                <div class="metric-group">
-                  <div class="metric-value">
-                    <span class="value-main">429</span><span class="value-unit">lx</span>
-                  </div>
-                  <div class="metric-label">illuminance</div>
-                </div>
-                <!-- sound level in decibels -->
-                <div class="metric-group">
-                  <div class="metric-value">
-                    <span class="value-main">49</span><span class="value-unit">db</span>
-                  </div>
-                  <div class="metric-label">sound</div>
-                </div>
-              </div>
-            </a>
-          </section>
+				<!-- Feature one -->
+				<div class="row product-brief-items">
+					<div class="brief-media center one-half column">
+						<img src="/public/assets/feature1.png" class="md-width">
+					</div>
 
-       <!-- <UncomfyLB client:load /> -->
-        <!-- react component for thermal comfort table, only loads on client -->
-        <ThermalComfortTable client:only="react"/>
-      </main>
-    </div>
-  </body>
+					<div class="brief-tab one-half column">
+						<h3 class="h3-title">Explore, compare and spot issues instantly</h3>
+						<p class="m-paragraph m-margin">Dive into any time period, compare conditions across spaces, and customize comfort parameters for focused insights.
+              Leaderboards highlight the least comfortable areas, showing how often each space meets comfort standards—and how that's changing over time.
+            </p>
+					</div>
+				</div>
+
+				<!-- Feature two -->
+				<div class="row product-brief-items">
+					<div class="brief-tab one-half column">
+						<h3 class="h3-title">Visualize patterns and variability</h3>
+						<p class="m-paragraph m-margin">Dive deep into how your spaces perform throughout the week. 
+              Atmos combines a heatmap—showing average temperature normalized to each day of the week—with a temperature variability box plot, so you can instantly spot when and where comfort fluctuates most. These visualizations make it easy to pinpoint recurring issues, highlight outliers, and identify HVAC inefficiencies.</p>
+					</div>
+
+					<div class="brief-media center one-half column">
+						<img src="/public/assets/feature2.png" class="md-width">
+					</div>
+				</div>
+
+        <!-- Feature three -->
+				<div class="row product-brief-items">
+					<div class="brief-media center one-half column">
+						<img src="/public/assets/feature3.png" class="md-width">
+					</div>
+
+					<div class="brief-tab one-half column">
+						<h3 class="h3-title">Identify long-term trends</h3>
+						<p class="m-paragraph m-margin">Go beyond day-to-day monitoring. Atmos helps you uncover long-term patterns in thermal comfort metrics. Track seasonal shifts,
+               measure the impact of interventions, and make data-driven decisions to optimize your indoor environments over time.</p>
+					</div>
+				</div>
+
+        <!-- Feature four -->
+				<div class="row product-brief-items">
+					<div class="brief-tab one-half column">
+						<h3 class="h3-title">Empower your people</h3>
+						<p class="m-paragraph m-margin">See thermal comfort zones for a wide range of people, not just the "average." Get actionable suggestions for faster, more responsive systems and give occupants more control. 
+              Integrated widgets let employees share real-time feedback and receive personalized, context-aware suggestions—making comfort a conversation, not a top-down decree.
+            </p>
+					</div>
+
+					<div class="brief-media center one-half column">
+						<img src="/public/assets/feature4.png" class="md-width">
+					</div>
+				</div>
+        
+				<p style="max-width: 800px; margin: 0 auto;">This website and application were built with Astro, React, React-Plotly, and 
+					Tailwind CSS for DECO3100; you can view its log <a href="/devlog.html" target="_blank">here</a>. All data is sourced from 
+					Tom Parkinson at the Indoor Environmental Quality (IEQ) Lab, University of Sydney. Special thanks to Kaz for an amazing unit and feedback!
+				</p>
+ 
+
+			</div>
+		</section>
+	</body>
 </html>
