@@ -1,11 +1,11 @@
 @use 'base';
 
-// CSS custom property for consistent sidebar width across components
+// css custom property for consistent sidebar width across components
 :root {
   --sidebar-width: 4rem;
 }
 
-// Fixed sidebar with full height and subtle styling
+// fixed sidebar with full height and subtle styling
 .sidebar {
   position: fixed;
   top: 0;
@@ -23,7 +23,7 @@
   box-shadow: inset -3px 0 4px rgba(0, 0, 0, 0.05); // subtle inner shadow
 }
 
-// Logo container at top of sidebar
+// logo container at top of sidebar
 .sidebar-logo {
   width: 100%;
   display: flex;
@@ -41,7 +41,7 @@
   }
 }
 
-// Navigation menu container with flexible layout
+// navigation menu container with flexible layout
 .sidebar-menu {
   flex: 1;
   display: flex;
@@ -51,7 +51,7 @@
   width: 100%;
 }
 
-// Navigation list with centered icon layout
+// navigation list with centered icon layout
 .sidebar-menu ul {
   list-style: none;
   padding: 0;
@@ -62,7 +62,7 @@
   gap: 15px; // consistent spacing between navigation items
 }
 
-// Individual navigation link styling with hover and active states
+// individual navigation link styling with hover and active states
 .sidebar-link {
   display: flex;
   align-items: center;
@@ -87,7 +87,7 @@
   }
 }
 
-// Material icons configuration with consistent styling
+// material icons configuration with consistent styling
 .material-symbols-outlined {
   font-variation-settings:
     'FILL' 0,

@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import '../styles/analytics.scss';
 
+/* Note: This component is not fully functional- the drop downs are there but does not actually filter data for the 
+uncomfylb table (due to time constraints) to provide the user an understanding of the application would work (if fully functional).
+The data shown in the table is filtered for time range last month (may) compared to its previous month, for only weekdays and working hours. 
+The temperature considered too cold is 21°c and too hot is 25°c (Default filtering). You can refer to /data/comfort_leaderboard.csv to understand how I got the data in the table. 
+*/ 
+
 // simple svg icon for the filter button - keeping it inline since it's small and specific to this component
 const FilterIcon = () => (
   <svg width="16" height="16" fill="none" viewBox="0 0 16 16" className="filter-icon">
@@ -81,8 +87,8 @@ function AdvancedFilters() {
             <div className="field-group field-group--wide">
               <label className="field-label">Days of the week</label>
               <Dropdown defaultValue="weekdays">
-                <option value="weekdays">Weekdays (Mon-Fri)</option>
-                <option value="weekends">Weekends (Sat-Sun)</option>
+                <option value="weekdays">Weekdays (mon-fri)</option>
+                <option value="weekends">Weekends (sat-sun)</option>
                 <option value="all">All days</option>
               </Dropdown>
             </div>
@@ -94,7 +100,7 @@ function AdvancedFilters() {
               <label className="field-label">Operating hours</label>
               <Dropdown defaultValue="9-5">
                 <option value="9-5">9 am- 5pm</option>
-                <option value="8-6">8 am- 6pm</option>
+                <option value="8-6">8 am- 6pm</option>  
                 <option value="all">All hours</option>
               </Dropdown>
             </div>
@@ -106,11 +112,11 @@ function AdvancedFilters() {
             <div className="field-group field-group--small">
               <label className="field-label">Too cold below</label>
               <Dropdown defaultValue="21">
-                <option value="21">21°C</option>
-                <option value="20">20°C</option>
-                <option value="19">19°C</option>
-                <option value="18">18°C</option>
-                <option value="17">17°C</option>
+                <option value="21">21°c</option>
+                <option value="20">20°c</option>
+                <option value="19">19°c</option>
+                <option value="18">18°c</option>
+                <option value="17">17°c</option>
               </Dropdown>
             </div>
             
@@ -119,11 +125,11 @@ function AdvancedFilters() {
             <div className="field-group field-group--small">
               <label className="field-label">Too hot above</label>
               <Dropdown defaultValue="25">
-                <option value="25">25°C</option>
-                <option value="26">26°C</option>
-                <option value="27">27°C</option>
-                <option value="28">28°C</option>
-                <option value="29">29°C</option>
+                <option value="25">25°c</option>
+                <option value="26">26°c</option>
+                <option value="27">27°c</option>
+                <option value="28">28°c</option>
+                <option value="29">29°c</option>
               </Dropdown>
             </div>
           </div>

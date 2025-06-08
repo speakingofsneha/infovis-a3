@@ -1,17 +1,17 @@
-// CSS custom properties for consistent layout dimensions across the dashboard
+// css custom properties for consistent layout dimensions across the dashboard
 :root {
   --sidebar-width: 70px;
   --topbar-height: 80px;
 }
 
-// Global body styling with custom font and light background
+// global body styling with custom font and light background
 body {
 margin: 0;
 font-family: 'Apercu Pro Regular', sans-serif;
 background: #f8f9fa;
 }
 
-// Main content area with sidebar offset and full viewport height
+// main content area with sidebar offset and full viewport height
 .main-content {
 margin-left: var(--sidebar-width);
 height: 100vh;
@@ -19,7 +19,7 @@ display: flex;
 flex-direction: column;
 }
 
-// Sticky header with shadow and branding
+// sticky header with shadow and branding
 .topbar {
 position: sticky;
 top: 0;
@@ -41,14 +41,14 @@ h1 {
 }
 }
 
-// Timestamp styling for data freshness indication
+// timestamp styling for data freshness indication
 .last-updated {
 color: #A5A5A5;
 margin-bottom: 1em;
 font-size: 0.9rem;
 }
 
-// Scrollable dashboard content area
+// scrollable dashboard content area
 .dashboard {
 flex: 1;
 overflow-y: auto;
@@ -56,14 +56,14 @@ padding: 32px 48px;
 background: #F7F7F7;
 }
 
-// Summary section layout with consistent spacing
+// summary section layout with consistent spacing
 .summary {
 display: flex;
 gap: 2rem;
 margin-bottom: 2rem;
 }
 
-// Base card styling shared across all dashboard cards
+// base card styling shared across all dashboard cards
 .card-base {
 background: #fff;
 border-radius: 0.3125rem;
@@ -76,7 +76,7 @@ justify-content: center;
 box-sizing: border-box;
 }
 
-// Overall score card with circular indicator
+// overall score card with circular indicator
 .score-card {
 @extend .card-base;
 width: 17.5rem;
@@ -113,7 +113,7 @@ font-style: normal;
 line-height: normal;
 }
 
-// Interactive metric cards with hover effects for navigation
+// interactive metric cards with hover effects for navigation
 .metric-card {
 @extend .card-base;
 cursor: pointer;
@@ -164,7 +164,7 @@ color: inherit;
       font-family: 'Apercu Pro Regular', sans-serif;
     }
 
-    // Variable unit sizes for different metric types
+    // variable unit sizes for different metric types
     &.pmv .value-unit { font-size: 30px; }
     &.temp .value-unit { font-size: 20px; }
     &.humidity .value-unit,
@@ -181,12 +181,12 @@ color: inherit;
 }
 }
 
-// Specific width modifiers for different card types based on content
+// specific width modifiers for different card types based on content
 .metric-card.thermal { width: 29rem; }
 .metric-card.air     { width: 10.6rem; }
 .metric-card.env     { width: 15rem; }
 
-// Back button styling for navigation
+// back button styling for navigation
 .back-button {
 color: #4B4A4A;
 text-decoration: none;
@@ -196,7 +196,7 @@ text-decoration: none;
 }
 }
 
-// Layout containers for chart components
+// layout containers for chart components
 .charts-container {
 display: flex;
 flex-direction: row;
@@ -209,7 +209,7 @@ display: flex;
 margin-top: 1rem;
 }
 
-// Disable hover effects for non-interactive environment card
+// disable hover effects for non-interactive environment card
 .metric-card.environment-width:hover,
 .metric-card.environment-width:focus {
 box-shadow: none;
@@ -217,6 +217,7 @@ transform: none;
 outline: none;
 }
 
+// advanced filters component with collapsible functionality
 .advanced-filters {
   background: #ffffff;
   border-radius: 4px;
@@ -265,6 +266,7 @@ outline: none;
     }
   }
 
+  // form field sizing variants
   .field-group {
     min-width: 160px;
 
@@ -291,6 +293,7 @@ outline: none;
     width: 100%;
   }
 
+  // styled dropdown with custom arrow
   .dropdown {
     width: 100%;
     padding: 12px 40px 12px 16px;
@@ -325,6 +328,7 @@ outline: none;
     pointer-events: none;
   }
 
+  // toggle button for expanding/collapsing filters
   .toggle-button {
     display: inline-flex;
     align-items: center;
@@ -359,6 +363,7 @@ outline: none;
     vertical-align: middle;
   }
 
+  // visual separator between form elements
   .separator {
     color: #9ca3af;
     font-size: 18px;
@@ -371,6 +376,7 @@ outline: none;
   }
 }
 
+// data table for displaying uncomfortable spaces with priority indicators
 .uncomfortable-spaces-table {
   background: #ffffff;
   border-radius: 5px;
@@ -463,6 +469,7 @@ outline: none;
     text-align: center;
   }
 
+  // visual progress bar for discomfort levels
   .progress-bar {
     display: inline-block;
     height: 12px;
@@ -482,6 +489,7 @@ outline: none;
     }
   }
 
+  // priority level color coding
   .priority-text {
     
     &:contains('Critical') {

@@ -1,11 +1,13 @@
 @use '../styles/base.scss' as *;
 
+// css custom properties for consistent theming
 :root {
 	--accent: #A89CDA;
 	--dark: #4B4A4A;
 	--tenary: #F7F7F7;
 }
 
+// base html and body setup
 html, body {
 	font-family: 'Apercu Pro';
 	margin: 0px;
@@ -13,6 +15,7 @@ html, body {
 	background: #F7F7F7;
 }
 
+// utility classes for layout
 .block {
 	display: block;
 }
@@ -24,11 +27,13 @@ html, body {
 	}
 }
 
+// centered text container for content sections
 .text-container {
 	max-width: 600px;
 	margin: 50px auto;
 }
 
+// typography hierarchy
 .h1-title, .h2-title, .s-subtitle, .l-subtitle {
 	font-weight: 500;
 }
@@ -46,6 +51,7 @@ html, body {
     font-family: 'Apercu Pro Medium';
 }
 
+// intro section styling - narrower width for readability
 .product-intro {
 	padding-bottom: 20px;
 	margin-bottom: 0;
@@ -57,6 +63,7 @@ html, body {
 	font-size: 1.9rem;
 }
 
+// margin utilities for spacing
 .s-margin {
 	margin-bottom: 5px;
 }
@@ -65,12 +72,14 @@ html, body {
 	margin-bottom: 2rem;
 }
 
+// responsive image width
 .md-width {
 	width: 400px;
 	max-width: 100%;
 	height: auto;
 }
 
+// paragraph sizing
 .s-paragraph {
 	font-size: 1.3rem;
 }
@@ -79,6 +88,7 @@ p {
 	font-size: 1.8rem;
 }
 
+// button styling with hover effects
 .button {
 	border-radius: 8px;
 	&.button-primary, &.button-primary:hover, &.button-primary:focus {
@@ -90,14 +100,17 @@ p {
 	}
 }
 
+// consistent section padding
 section {
 	padding: 70px 0;
 }
 
+// center alignment utility
 .center {
 	text-align: center;
 }
 
+// call to action button container
 .product-cta {
 	max-width: 250px;
 	margin: 0 auto;
@@ -108,7 +121,7 @@ section {
 	}
 }
 
-// Header Styles
+// header logo positioning
 .logo-image {
 	width: 28px;
 	height: 28px;
@@ -122,13 +135,13 @@ section {
     margin-top: -35px;
 }
 
-// Hero Styles
+// hero section layout and positioning
 .product-hero {
 	padding: 50px 0;
 	.container {
 		position: relative;
 		.d-table {
-			height: auto; // Changed from 500px to auto
+			height: auto; // changed from fixed height for flexibility
 		}
 	}
 	.hero-copy {
@@ -138,9 +151,9 @@ section {
 		}
 	}
 	.hero-media {
-		margin-top: 20px; // Add some spacing above the mockup
+		margin-top: 20px; // spacing above the mockup
 		img {
-			// Remove all the absolute positioning styles
+			// removed absolute positioning for better flow
 			width: 160px;
 			display: block;
 			margin: 0 auto;
@@ -148,6 +161,7 @@ section {
 	}
 }
 
+// main hero device mockup sizing
 .hero-media .device-mockup {
 	width: 1000px !important;
 	max-width: 100%;
@@ -155,7 +169,7 @@ section {
     margin: 0 auto 0; 
 }
 
-// Brief Styles
+// features section with alternating layout
 .product-brief {
 	padding-top: 20px;
 	margin-top: 0;
@@ -173,6 +187,7 @@ section {
 		}
 	}
 
+	// feature grid layout for icons and text
 	.feature-grid {
 		display: flex;
 		p {
@@ -184,6 +199,7 @@ section {
 		}
 	}
 
+	// feature image containers
 	.brief-media {
 		background: transparent !important;
 		position: relative;
@@ -198,9 +214,9 @@ section {
 	}
 }
 
+// smaller cta mockup sizing
 .product-cta .hero-media .device-mockup {
 	width: 400px !important;
 	max-width: 100%;
 	height: auto;
 }
-

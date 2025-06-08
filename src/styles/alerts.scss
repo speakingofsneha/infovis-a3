@@ -1,6 +1,6 @@
 @use './base.scss' as base;
 
-// Base alert component styling with flexbox layout and consistent spacing
+// base alert component styling with flexbox layout and consistent spacing
 .alert {
   display: flex;
   align-items: center;
@@ -16,14 +16,14 @@
   color: base.$dark-text;
 }
 
-// Icon styling to ensure consistent size and prevent shrinking
+// icon styling to ensure consistent size and prevent shrinking
 .alert .material-symbols-outlined {
   font-size: 1.5em;
   flex-shrink: 0;
 }
 
-// Alert type variants using semantic color coding for immediate recognition
-// Each type uses light background with darker text for accessibility
+// alert type variants using semantic color coding for immediate recognition
+// each type uses light background with darker text for accessibility
 .alert-warning {
   background: #fffbe6;
   color: #b8860b;
@@ -48,7 +48,7 @@
   border-color: #91d5ff;
 }
 
-// Optional close button positioned absolutely for consistent placement
+// optional close button positioned absolutely for consistent placement
 .alert .close {
   position: absolute;
   right: 16px;
@@ -60,14 +60,14 @@
   cursor: pointer;
 }
 
-// Container styling to constrain width and provide consistent spacing
+// container for multiple alerts with proper spacing
 .alerts-list {
   max-width: 600px;
   margin-left: 0;
   padding-top: 32px;
 }
 
-// Remove top margin from first alert to prevent double spacing
+// remove top margin from first alert to prevent double spacing
 .alerts-list .alert:first-child {
   margin-top: 0;
 }

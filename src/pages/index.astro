@@ -8,32 +8,36 @@ import '../styles/index.scss';
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
+		<!-- basic page info for seo and accessibility -->
 		<meta name="description" content="Idol is an elegant landing page template for micro SaaS products built with AstroJS & Skeleton CSS">
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Atmos</title>
+		<!-- skeleton css framework for quick styling -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
 	</head>
 	<body>
-		<!-- Header Component -->
+		<!-- simple header with logo and brand name -->
 		<header class="nav">
       <img class="logo-image" src="/favicon.png" alt="favicon">
       <p class="logo-text">Atmos</p>
 		</header>
 
-		<!-- Hero Component -->
-<!-- Hero Component -->
+		<!-- main hero section - the big attention grabber -->
 <section class="product-hero">
 	<div class="container">
 		<div class="d-table">
 			<div class="d-table-cell center">
 				<div class="hero-copy">
+					<!-- main headline and value prop -->
 					<h1 class="h1-title">The dashboard for equitable environments</h1>
 					<p> Atmos helps you manage, compare and analyse indoor environment data all in one place, to help maintain spaces that are comfortable for <i>all.</i></p>
+					<!-- call to action button -->
 					<div class="product-cta">
 						<a href="/analytics" class="button button-primary u-full-width" target="_blank">View Demo</a>
 					</div>
+          <!-- hero image/mockup -->
           <div class="hero-media">
             <img src="/public/assets/hero.png" alt="device mockup" class="device-mockup">
           </div>
@@ -43,25 +47,26 @@ import '../styles/index.scss';
 	</div>
 </section>
 
-
-    <!-- Intro Component -->
+    <!-- problem statement and solution intro -->
     <section class="product-intro">
       <div class="container">
+        <!-- explaining the problem this product solves -->
         <h3 class="h2-title">The problem</h3>
         <p class="m-paragraph m-margin">The thermal comfort models guiding most buildings are based on 1960s-era studies of college-aged men from northern Europe and America, 
           leaving out the needs of diverse populations. Designing for a single "average person" isn't equitable—because that person doesn't exist—yet buildings are still 
           cooled, heated, and ventilated as if they do. So, how can we better represent and design for an entire population?</p>
         <hr>
+        <!-- introducing the solution -->
         <h3 class="h2-title">Introducing atmos</h3>
         <p class="m-paragraph m-margin">A dashboard that analyzes real-world indoor environment data to reveal how different people experience your spaces. Our platform lets you:</p>
       </div>
     </section>
     
-		<!-- Brief Component -->
+		<!-- main features section with alternating layout -->
 		<section class="product-brief" id="features">
 			<div class="container">
 
-				<!-- Feature one -->
+				<!-- feature 1: data exploration and comparison -->
 				<div class="row product-brief-items">
 					<div class="brief-media center one-half column">
 						<img src="/public/assets/feature1.png" class="md-width">
@@ -75,7 +80,7 @@ import '../styles/index.scss';
 					</div>
 				</div>
 
-				<!-- Feature two -->
+				<!-- feature 2: data visualization tools -->
 				<div class="row product-brief-items">
 					<div class="brief-tab one-half column">
 						<h3 class="h3-title">Visualize patterns and variability</h3>
@@ -88,7 +93,7 @@ import '../styles/index.scss';
 					</div>
 				</div>
 
-        <!-- Feature three -->
+        <!-- feature 3: long-term analytics -->
 				<div class="row product-brief-items">
 					<div class="brief-media center one-half column">
 						<img src="/public/assets/feature3.png" class="md-width">
@@ -101,7 +106,7 @@ import '../styles/index.scss';
 					</div>
 				</div>
 
-        <!-- Feature four -->
+        <!-- feature 4: user empowerment and feedback -->
 				<div class="row product-brief-items">
 					<div class="brief-tab one-half column">
 						<h3 class="h3-title">Empower your people</h3>
@@ -115,11 +120,11 @@ import '../styles/index.scss';
 					</div>
 				</div>
         
+				<!-- credits and tech stack info -->
 				<p style="max-width: 800px; margin: 0 auto;">This website and application were built with Astro, React, React-Plotly, and 
 					Tailwind CSS for DECO3100; you can view its log <a href="/devlog.html" target="_blank">here</a>. All data is sourced from 
 					Tom Parkinson at the Indoor Environmental Quality (IEQ) Lab, University of Sydney. Special thanks to Kaz for an amazing unit and feedback!
 				</p>
- 
 
 			</div>
 		</section>

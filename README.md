@@ -1,6 +1,6 @@
 # Atmos - Indoor Environmental Quality Dashboard
 
-An elegant data visualization dashboard for analyzing indoor environmental quality (IEQ) data, built with Astro, React, and React-Plotly. Atmos helps building managers create more equitable and comfortable indoor environments by visualizing temperature, air quality, and comfort metrics across spaces and time periods.
+An elegant interactive analytics dashboard for monitoring indoor environmental quality, built with Astro, React, and React-Plotly. Atmos helps building managers create more equitable and comfortable indoor environments by visualizing temperature, air quality, and comfort metrics across spaces and time periods.
 
 ## Features
 
@@ -25,7 +25,7 @@ All commands are run from the root of the project, from a terminal:
 
 ## Project Structure
 ```
-/ app demo
+/ App demo
 ├── src/               
 │   ├── components/          # React components for charts and UI
 │   │   ├── co2history.jsx      # CO₂ history chart
@@ -60,5 +60,5 @@ All commands are run from the root of the project, from a terminal:
 This project was created for DECO3100 at the University of Sydney.
 - **Tom Parkinson, IEQ Lab at the University of Sydney** - Data collection and IEQ Lab research. The dataset includes temperature, humidity, CO₂, and comfort metrics collected across multiple building zones.
 - **Kazjon Grace** - Course instruction and guidance
-- **Perplexity, Claude and Chat GPT** - Writing scripts for data cleaning, debugging, writing boilderplate code & moral support. 
+- **Perplexity, Google AI studio and Chat GPT** - Writing scripts for data cleaning, debugging, writing boilderplate code & moral support. 
 
