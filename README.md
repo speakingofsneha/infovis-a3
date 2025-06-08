@@ -16,10 +16,16 @@ An elegant data visualization dashboard for analyzing indoor environmental quali
 - **Data Processing**: Python pandas scripts
 
 ## Installation
-npm install 
-npm run dev 
+All commands are run from the root of the project, from a terminal:
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
 
 ## Project Structure
+```
+/ app demo
 ├── src/               
 │   ├── components/          # React components for charts and UI
 │   │   ├── co2history.jsx      # CO₂ history chart
@@ -46,7 +52,9 @@ npm run dev
 │   │   └── …   
 │   └── favicon.png             # Site favicon
 ├── data/                   # CSV and other data files for visualizations
-└── README.md        
+└── README.md  
+/ Data cleaning   # Script filed used to clean data for charts
+```   
 
 ## Acknowledgments
 This project was created for DECO3100 at the University of Sydney.
