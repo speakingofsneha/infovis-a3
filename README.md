@@ -16,12 +16,20 @@ An elegant interactive analytics dashboard for monitoring indoor environmental q
 - **Data Processing**: Python pandas scripts
 
 ## Installation
-All commands are run from the root of the project, from a terminal:
+Follow these steps to set up the project: 
+1. **Install dependencies**
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+   ```bash
+   npm install
+   ```
+
+2. **Start the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+   This will start the local dev server at [http://localhost:4321](http://localhost:4321).
 
 ## Project Structure
 ```

@@ -15,6 +15,12 @@ html, body {
 	background: #F7F7F7;
 }
 
+// page title styling
+title {
+	display: block;
+	margin-top: 20px;
+}
+
 // utility classes for layout
 .block {
 	display: block;
@@ -125,14 +131,14 @@ section {
 .logo-image {
 	width: 28px;
 	height: 28px;
-    margin-left:60px;
-    margin-top: 25px;
+    margin-left: 60px;
+    margin-top: 35px;
 }
 
 .logo-text {
     font-size: 1.2em;
     margin-left: 100px;
-    margin-top: -35px;
+    margin-top: -28px;
 }
 
 // hero section layout and positioning
