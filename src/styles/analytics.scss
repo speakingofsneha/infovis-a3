@@ -493,16 +493,18 @@ outline: none;
 
   // priority level color coding
   .priority-text {
+    font-weight: 500;
+    color: #4B4A4A;
     
-    &:contains('Critical') {
+    &.priority-critical {
       color: #dc2626;
     }
     
-    &:contains('High') {
+    &.priority-high {
       color: #ea580c;
     }
     
-    &:contains('Medium') {
+    &.priority-medium {
       color: #ca8a04;
     }
   }

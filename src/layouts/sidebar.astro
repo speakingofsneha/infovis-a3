@@ -17,7 +17,7 @@ const currentPath = Astro.url.pathname;
       {/* analytics/dashboard link - active for both home and thermal comfort pages */}
       <li>
         <a 
-          href="/analytics" 
+          href="/infovis-a3/analytics" 
           title="Analytics" 
           class={`sidebar-link ${currentPath === '/analytics' || currentPath === '/thermalcomf' ? 'active' : ''}`}
         >
@@ -28,7 +28,7 @@ const currentPath = Astro.url.pathname;
       {/* alerts page link */}
       <li>
         <a 
-          href="/alerts" 
+          href="/infovis-a3/alerts" 
           title="Alerts" 
           class={`sidebar-link ${currentPath === '/alerts' ? 'active' : ''}`}
         >
@@ -39,7 +39,7 @@ const currentPath = Astro.url.pathname;
       {/* about page link - opens in new tab */}
       <li>
         <a 
-          href="/" 
+          href="/infovis-a3/" 
           title="About" 
           class={`sidebar-link ${currentPath === '/' ? 'active' : ''}`}
           target="_blank"

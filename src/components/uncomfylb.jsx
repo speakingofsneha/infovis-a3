@@ -75,7 +75,7 @@ function UncomfortableSpacesTable() {
               
               {/* action priority - helps facility managers prioritize their work */}
               <td className="table-cell table-cell--priority">
-                <span className="priority-text">{row.priority}</span>
+                <span className={`priority-text priority-${row.priority.toLowerCase()}`}>{row.priority}</span>
               </td>
             </tr>
           ))}
