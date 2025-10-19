@@ -48,7 +48,7 @@ function CO2Trends() {
                 // dynamic file path construction following your established data organization
                 // url encoding for spaces in path ensures proper file access
                 const fileName = `co2trends_floor${selectedFloor}.csv`;
-                const dataPath = `/data/air%20quality/trends/${selectedTimeRange}/${fileName}`;
+                const dataPath = `/infovis-a3/data/air%20quality/trends/${selectedTimeRange}/${fileName}`;
                 const csvData = await d3.csv(dataPath);
                 
                 // validate data exists before processing - prevents downstream errors

@@ -151,7 +151,7 @@ function BoxPlot({ selectedZone, selectedTimeRange }) {
     // dynamic file loading based on user selections
     console.log(`Loading data for zone ${selectedZone} and time range ${selectedTimeRange}`);
     const fileName = selectedTimeRange === 'month' ? `may_zone${selectedZone}.csv` : `lastquarter_zone${selectedZone}.csv`;
-    const dataPath = `/data/thermal comfort/boxplot/${selectedTimeRange}/${fileName}`;
+    const dataPath = `/infovis-a3/data/thermal comfort/boxplot/${selectedTimeRange}/${fileName}`;
     console.log(`Loading data from: ${dataPath}`);
     
     // d3 csv loading with error handling

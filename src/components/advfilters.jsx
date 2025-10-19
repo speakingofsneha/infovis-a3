@@ -4,7 +4,7 @@ import '../styles/analytics.scss';
 /* Note: This component is not fully functional- the drop downs are there but does not actually filter data for the 
 uncomfylb table (due to time constraints) to provide the user an understanding of the application would work (if fully functional).
 The data shown in the table is filtered for time range last month (may) compared to its previous month, for only weekdays and working hours. 
-The temperature considered too cold is 21°c and too hot is 25°c (Default filtering). You can refer to /data/comfort_leaderboard.csv to understand how I got the data in the table. 
+The temperature considered too cold is 21°c and too hot is 25°c (Default filtering). You can refer to /infovis-a3/data/comfort_leaderboard.csv to understand how I got the data in the table. 
 */ 
 
 // simple svg icon for the filter button - keeping it inline since it's small and specific to this component

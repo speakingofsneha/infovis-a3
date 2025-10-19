@@ -157,7 +157,7 @@ function Heatmap({ selectedZone, selectedTimeRange }) {
     // load csv data based on selected zone and time range
     console.log(`Loading data for zone ${selectedZone} and time range ${selectedTimeRange}`);
     const fileName = selectedTimeRange === 'month' ? `lastmonth_zone${selectedZone}.csv` : `lastquarter_zone${selectedZone}.csv`;
-    const dataPath = `/data/thermal comfort/heatmap/${selectedTimeRange}/${fileName}`;
+    const dataPath = `/infovis-a3/data/thermal comfort/heatmap/${selectedTimeRange}/${fileName}`;
     console.log(`Loading data from: ${dataPath}`);
     
     // use d3 to load and parse csv file

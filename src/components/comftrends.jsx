@@ -46,7 +46,7 @@ function ComfortTrends() {
                 console.log('Loading data for:', selectedTimeRange, 'floor:', selectedFloor);
                 // construct file path dynamically based on user selections
                 const fileName = `comftrends_floor${selectedFloor}.csv`;
-                const dataPath = `/data/thermal comfort/trends/${selectedTimeRange}/${fileName}`;
+                const dataPath = `/infovis-a3/data/thermal comfort/trends/${selectedTimeRange}/${fileName}`;
                 console.log('Loading from path:', dataPath);
                 
                 // use d3.csv to load and parse csv file
