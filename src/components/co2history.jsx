@@ -31,7 +31,7 @@ function CO2History() {
                 // dynamic file path construction based on user selections
                 // follows your established data organization pattern
                 const fileName = `co2history_floor${selectedFloor}.csv`;
-                const dataPath = `/infovis-a3/data/air quality/history/${selectedTimeRange}/${fileName}`;
+                const dataPath = `/infovis-a3/data/air%20quality/history/${selectedTimeRange}/${fileName}`;
                 const csvData = await d3.csv(dataPath);
                 
                 // validate data exists before processing

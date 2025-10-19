@@ -16,6 +16,9 @@
 - [x] fix paths
     - [x] make about.astro index.astro (landing page)
     - [x] & index.astro -> analytics.astro (fix scss file names + paths as well)
+- [x] deployment
+    - [ ] error loading data
+       
 
 ## Design / Frontend
 - [x] favicon 
